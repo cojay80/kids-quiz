@@ -1,11 +1,10 @@
-// sw.js — v1.3.0
-const CACHE = 'kids-quiz-v1.3.0';
+// sw.js — v1.4.0
+const CACHE = 'kids-quiz-v1.4.0';
 const CORE = [
   '../',
   '../index.html',
   '../assets/app.css',
-  '../assets/config.js',
-  '../assets/app-online.js',
+  '../assets/app-infinite.js',
   './manifest.webmanifest',
   '../icons/android-chrome-192x192.png',
   '../icons/android-chrome-512x512.png',
@@ -18,6 +17,6 @@ self.addEventListener('fetch', e=>{
   if(e.request.method!=='GET') return;
   const url=new URL(e.request.url);
   if(url.origin===self.location.origin){ e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))); return; }
-  // network-first for online APIs
+  // network-first for online APIs (OpenTDB/Unsplash)
   e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)));
 });

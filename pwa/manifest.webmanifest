@@ -1,7 +1,6 @@
 {
-  "name": "키즈 퀴즈 놀이터 (온라인)",
+  "name": "키즈 퀴즈 놀이터 (무한모드)",
   "short_name": "KidsQuiz",
-  "description": "온라인 무한 퀴즈 — Google Sheets + OpenTDB + Unsplash",
   "lang": "ko",
   "start_url": "/kids-quiz/",
   "scope": "/kids-quiz/",

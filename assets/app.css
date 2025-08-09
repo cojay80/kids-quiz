@@ -18,5 +18,3 @@ body { font-family: 'Fredoka', 'Noto Sans KR', system-ui, -apple-system, Segoe U
 .sticker-toast{ position:fixed; inset:0; display:grid; place-items:center; pointer-events:none; z-index:60; }
 .sticker-badge{ background:white; border-radius:24px; padding:16px 20px; box-shadow:0 12px 28px rgba(0,0,0,.18); display:flex; align-items:center; gap:12px; font-weight:800; }
 .sticker-badge img{ width:56px; height:56px; }
-.dino-confetti{ position:fixed; inset:0; pointer-events:none; z-index:50; }
-.dino-confetti img{ position:absolute; width:36px; height:36px; opacity:.95; transform:translateY(-20vh) rotate(0deg) scale(0.9); transition: transform 1200ms linear, opacity 1200ms linear; }

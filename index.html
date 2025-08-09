@@ -3,11 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>키즈 퀴즈 놀이터 — v1.3.0 (온라인 무한 퀴즈)</title>
+  <title>키즈 퀴즈 놀이터 — v1.4.0 (무한 온라인 + 학년별 과목)</title>
   <link rel="manifest" href="pwa/manifest.webmanifest">
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <meta name="theme-color" content="#3b82f6">
-  <meta name="description" content="초등 2학년 맞춤 퀴즈 — 온라인 무한 퀴즈(구글시트/오픈트리비아) + 이미지 자동 매칭">
   <script src="https://cdn.tailwindcss.com" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,12 +18,9 @@
 </head>
 <body class="page-bg">
   <header class="hero-bg text-white">
-    <div class="max-w-6xl mx-auto px-4 py-10 md:py-16 flex items-center gap-6">
-      <img src="icons/android-chrome-192x192.png" alt="logo" class="w-16 h-16 rounded-2xl shadow-lg">
-      <div>
-        <h1 class="text-3xl md:text-5xl font-extrabold drop-shadow">키즈 퀴즈 놀이터</h1>
-        <p class="mt-1 md:text-lg drop-shadow">온라인 무한 퀴즈 · 국어 · 수학 · 영어 · 상식 • 타이머 · 오답노트 · 스티커 · PWA</p>
-      </div>
+    <div class="max-w-6xl mx-auto px-4 py-10 md:py-16">
+      <h1 class="text-3xl md:text-5xl font-extrabold drop-shadow">키즈 퀴즈 놀이터</h1>
+      <p class="mt-1 md:text-lg drop-shadow">무한 랜덤 퀴즈 · 초1~고3 학년/과목 맞춤 • 타이머 · 오답노트 · PWA</p>
     </div>
   </header>
 
@@ -34,33 +29,41 @@
       <section class="rounded-3xl glass p-5 md:p-6 shadow">
         <h2 class="text-xl font-bold mb-3">시작하기</h2>
         <div class="space-y-4">
-          <div>
-            <label class="block text-sm font-semibold mb-1">카테고리</label>
-            <div class="grid grid-cols-2 gap-2">
-              <button data-cat="국어" class="cat btn-ghost border border-rose-200 rounded-2xl px-4 py-3 flex items-center justify-center gap-2"><span>📝</span>국어</button>
-              <button data-cat="수학" class="cat btn-ghost border border-amber-200 rounded-2xl px-4 py-3 flex items-center justify-center gap-2"><span>➗</span>수학</button>
-              <button data-cat="영어" class="cat btn-ghost border border-emerald-200 rounded-2xl px-4 py-3 flex items-center justify-center gap-2"><span>🔤</span>영어</button>
-              <button data-cat="상식" class="cat btn-ghost border border-indigo-200 rounded-2xl px-4 py-3 flex items-center justify-center gap-2"><span>🌍</span>상식</button>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-sm font-semibold mb-1">학년</label>
+              <select id="grade" class="w-full rounded-xl border-slate-300 p-2.5">
+                <optgroup label="초등">
+                  <option value="초1">초1</option><option value="초2">초2</option><option value="초3">초3</option>
+                  <option value="초4">초4</option><option value="초5">초5</option><option value="초6">초6</option>
+                </optgroup>
+                <optgroup label="중등">
+                  <option value="중1">중1</option><option value="중2">중2</option><option value="중3">중3</option>
+                </optgroup>
+                <optgroup label="고등">
+                  <option value="고1">고1</option><option value="고2">고2</option><option value="고3">고3</option>
+                </optgroup>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold mb-1">과목</label>
+              <select id="subject" class="w-full rounded-xl border-slate-300 p-2.5">
+                <option value="국어">국어</option>
+                <option value="수학" selected>수학</option>
+                <option value="영어">영어</option>
+                <option value="과학">과학</option>
+                <option value="사회/역사">사회/역사</option>
+                <option value="상식">상식</option>
+              </select>
             </div>
           </div>
 
           <div class="grid grid-cols-2 gap-3">
             <div>
               <label class="block text-sm font-semibold mb-1">문항 수</label>
-              <input id="numQ" type="range" min="5" max="20" value="10" class="w-full">
+              <input id="numQ" type="range" min="5" max="30" value="10" class="w-full">
               <div class="text-sm text-slate-600 mt-1"><span id="numQVal">10</span>문제</div>
             </div>
-            <div>
-              <label class="block text-sm font-semibold mb-1">난이도</label>
-              <select id="level" class="w-full rounded-xl border-slate-300 p-2.5">
-                <option value="1">쉬움</option>
-                <option value="2">보통</option>
-                <option value="3">도전!</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-3">
             <div>
               <label class="block text-sm font-semibold mb-1">타이머</label>
               <select id="timerSelect" class="w-full rounded-xl border-slate-300 p-2.5">
@@ -70,20 +73,13 @@
                 <option value="45">45초</option>
               </select>
             </div>
-            <div class="flex items-end justify-between">
-              <label class="flex items-center gap-2 select-none">
-                <input id="useOnline" type="checkbox" checked class="w-5 h-5"/>
-                <span class="text-sm">온라인 문제 사용</span>
-              </label>
-              <button id="btnConfig" class="text-sm underline text-slate-600">데이터 연결 설정</button>
-            </div>
           </div>
 
           <div class="flex gap-3 items-center">
             <button id="startBtn" class="btn-primary rounded-2xl px-5 py-3 font-bold text-white bg-blue-600 hover:bg-blue-700 active:scale-95 transition">퀴즈 시작 🚀</button>
-            <button id="btnReviewWrong" class="btn-soft rounded-2xl px-5 py-3 font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 active:scale-95 transition">오답노트 풀기 📝</button>
+            <button id="btnReviewWrong" class="btn-soft rounded-2xl px-5 py-3 font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 active:scale-95 transition">오답노트 📝</button>
           </div>
-          <p class="text-xs text-slate-500">* 인터넷이 불안정하면 자동으로 오프라인 문제로 전환됩니다.</p>
+          <p class="text-xs text-slate-500">* 네트워크 불가 시 자동으로 오프라인 문제로 전환됩니다.</p>
         </div>
       </section>
 
@@ -109,16 +105,16 @@
       <div id="stage" class="rounded-3xl glass p-5 md:p-8 shadow min-h-[520px] flex flex-col">
         <div id="idle" class="flex-1 grid place-items-center text-center">
           <div>
-            <img alt="kids" class="mx-auto w-40 md:w-56 mb-4" src="icons/android-chrome-192x192.png"/>
-            <p class="text-lg md:text-xl text-slate-700">왼쪽에서 설정을 고르고 <span class="font-bold">퀴즈 시작</span>을 눌러요!</p>
+            <img alt="logo" class="mx-auto w-40 md:w-56 mb-4" src="icons/android-chrome-192x192.png"/>
+            <p class="text-lg md:text-xl text-slate-700">학년/과목을 고르고 <span class="font-bold">퀴즈 시작</span>을 눌러요!</p>
           </div>
         </div>
 
         <div id="quiz" class="hidden flex-1">
           <div class="flex items-center justify-between mb-3">
             <div class="flex items-center gap-2">
-              <span id="tagCat" class="tag">카테고리</span>
-              <span id="tagLvl" class="tag bg-sky-100 text-sky-700">난이도</span>
+              <span id="tagCat" class="tag">과목</span>
+              <span id="tagLvl" class="tag bg-sky-100 text-sky-700">학년</span>
             </div>
             <div class="flex items-center gap-3">
               <span id="timerBadge" class="hidden rounded-full px-3 py-1 text-sm font-bold bg-rose-100 text-rose-700">⏱ <span id="timerText">30s</span></span>
@@ -161,8 +157,7 @@
     </section>
   </main>
 
-  <script src="assets/config.js"></script>
-  <script src="assets/app-online.js"></script>
+  <script src="assets/app-infinite.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
       const reg = () => navigator.serviceWorker.register('./pwa/sw.js');
