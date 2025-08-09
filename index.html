@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>키즈 퀴즈 놀이터 — v1.4.0 (무한 온라인 + 학년별 과목)</title>
+  <title>키즈 퀴즈 놀이터 — v1.5.0 (고등 난이도 업그레이드)</title>
   <link rel="manifest" href="pwa/manifest.webmanifest">
   <meta name="theme-color" content="#3b82f6">
   <script src="https://cdn.tailwindcss.com" defer></script>
@@ -41,7 +41,7 @@
                   <option value="중1">중1</option><option value="중2">중2</option><option value="중3">중3</option>
                 </optgroup>
                 <optgroup label="고등">
-                  <option value="고1">고1</option><option value="고2">고2</option><option value="고3">고3</option>
+                  <option value="고1" selected>고1</option><option value="고2">고2</option><option value="고3">고3</option>
                 </optgroup>
               </select>
             </div>
@@ -70,7 +70,7 @@
                 <option value="0">끄기</option>
                 <option value="20">20초</option>
                 <option value="30" selected>30초</option>
-                <option value="45">45초</option>
+                <option value="60">60초</option>
               </select>
             </div>
           </div>
@@ -79,7 +79,7 @@
             <button id="startBtn" class="btn-primary rounded-2xl px-5 py-3 font-bold text-white bg-blue-600 hover:bg-blue-700 active:scale-95 transition">퀴즈 시작 🚀</button>
             <button id="btnReviewWrong" class="btn-soft rounded-2xl px-5 py-3 font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 active:scale-95 transition">오답노트 📝</button>
           </div>
-          <p class="text-xs text-slate-500">* 네트워크 불가 시 자동으로 오프라인 문제로 전환됩니다.</p>
+          <p class="text-xs text-slate-500">* 고등 과목은 이미지가 기본적으로 표시되지 않아요(문제 집중). 필요하면 정답 보기에서 해설 확인.</p>
         </div>
       </section>
 
@@ -102,11 +102,11 @@
     </aside>
 
     <section class="md:col-span-3">
-      <div id="stage" class="rounded-3xl glass p-5 md:p-8 shadow min-h-[520px] flex flex-col">
+      <div id="stage" class="rounded-3xl glass p-5 md:p-8 shadow min-h-[560px] flex flex-col">
         <div id="idle" class="flex-1 grid place-items-center text-center">
           <div>
             <img alt="logo" class="mx-auto w-40 md:w-56 mb-4" src="icons/android-chrome-192x192.png"/>
-            <p class="text-lg md:text-xl text-slate-700">학년/과목을 고르고 <span class="font-bold">퀴즈 시작</span>을 눌러요!</p>
+            <p class="text-lg md:text-2xl text-slate-700">학년/과목을 고르고 <span class="font-bold">퀴즈 시작</span>을 눌러요!</p>
           </div>
         </div>
 
@@ -123,7 +123,7 @@
           </div>
 
           <div class="flex-1">
-            <div class="text-xl md:text-2xl font-extrabold leading-snug" id="qText">문제 텍스트</div>
+            <div class="text-2xl md:text-3xl font-extrabold leading-snug" id="qText">문제 텍스트</div>
             <figure id="qImageWrap" class="mt-4 hidden">
               <img id="qImage" alt="문제 이미지" class="max-h-60 rounded-2xl border" />
               <figcaption class="text-sm text-slate-500 mt-1">그림을 보고 맞혀 보세요</figcaption>
@@ -143,7 +143,7 @@
         <div id="result" class="hidden flex-1 grid place-items-center text-center">
           <div>
             <div class="text-5xl">🏆</div>
-            <h3 class="text-2xl md:text-3xl font-extrabold mt-2">잘했어요!</h3>
+            <h3 class="text-2xl md:text-3xl font-extrabold mt-2">좋아요!</h3>
             <p class="text-slate-700 mt-2">정답 <b id="scoreRight">0</b>/<b id="scoreTotal">0</b> • 점수 <b id="scorePct">0</b>%</p>
             <div class="mt-4 flex items-center justify-center gap-3">
               <button id="btnRetry" class="btn-soft rounded-2xl px-5 py-3 font-bold text-blue-700 bg-blue-50 hover:bg-blue-100">다시 풀기</button>
@@ -157,7 +157,7 @@
     </section>
   </main>
 
-  <script src="assets/app-infinite.js"></script>
+  <script src="assets/app-hs.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
       const reg = () => navigator.serviceWorker.register('./pwa/sw.js');
