@@ -1,0 +1,16 @@
+{
+  "name": "키즈 퀴즈 놀이터",
+  "short_name": "키즈퀴즈",
+  "description": "초등 2학년 맞춤 퀴즈 — 국어, 수학, 영어, 상식",
+  "lang": "ko",
+  "start_url": "/kids-quiz/",
+  "scope": "/kids-quiz/",
+  "display": "standalone",
+  "background_color": "#f8fbff",
+  "theme_color": "#3b82f6",
+  "icons": [
+    { "src": "../icons/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "../icons/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "../icons/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
+  ]
+}
