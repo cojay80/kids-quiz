@@ -3,6 +3,8 @@ html, body { height: 100%; }
 body { font-family: 'Fredoka', 'Noto Sans KR', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: var(--bg); transition: background 400ms ease; }
 .glass { backdrop-filter: blur(12px); background: rgba(255,255,255,0.75); }
 .btn-ghost { background: rgba(255,255,255,.65); }
+.btn-soft { background: #eff6ff; }
+.btn-primary { box-shadow: 0 6px 16px rgba(59,130,246,.25); }
 .choice { width:100%; text-align:left; border-radius: 1rem; border:1px solid #e2e8f0; padding: 1rem; font-weight:700; background:white; }
 .choice.correct { border-color:#34d399; background:#ecfdf5; }
 .choice.wrong { border-color:#fb7185; background:#fff1f2; }
@@ -11,7 +13,7 @@ body { font-family: 'Fredoka', 'Noto Sans KR', system-ui, -apple-system, Segoe U
 .tag-math{ background:#fde68a; color:#92400e;}
 .tag-en{ background:#d1fae5; color:#065f46;}
 .tag-gk{ background:#e0e7ff; color:#3730a3;}
-.sticker-grid img{ width:48px; height:48px; border-radius:12px; background:rgba(255,255,255,.8); padding:6px; border:1px solid rgba(148,163,184,.35); box-shadow:0 2px 6px rgba(0,0,0,.06); }
+.sticker-grid img{ width:44px; height:44px; border-radius:12px; background:rgba(255,255,255,.8); padding:6px; border:1px solid rgba(148,163,184,.35); box-shadow:0 2px 6px rgba(0,0,0,.06); }
 .sticker-locked{ filter:grayscale(1) opacity(.35); }
 .sticker-toast{ position:fixed; inset:0; display:grid; place-items:center; pointer-events:none; z-index:60; }
 .sticker-badge{ background:white; border-radius:24px; padding:16px 20px; box-shadow:0 12px 28px rgba(0,0,0,.18); display:flex; align-items:center; gap:12px; font-weight:800; }

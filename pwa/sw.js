@@ -1,47 +1,23 @@
-// sw.js — Kids Quiz PWA
-const CACHE_VERSION = 'kq-v1.2.2';
-const CACHE_NAME = `kids-quiz-${CACHE_VERSION}`;
+// sw.js — v1.3.0
+const CACHE = 'kids-quiz-v1.3.0';
 const CORE = [
   '../',
   '../index.html',
   '../assets/app.css',
-  '../assets/app.js',
+  '../assets/config.js',
+  '../assets/app-online.js',
   './manifest.webmanifest',
   '../icons/android-chrome-192x192.png',
   '../icons/android-chrome-512x512.png',
-  '../icons/apple-touch-icon.png',
   '../img/hero-bg.png',
-  '../img/bg-tile.png',
-  '../img/btn-start.png',
-  '../img/btn-reveal.png',
-  '../img/btn-next.png',
-  '../img/btn-review.png',
-  '../img/btn-retry.png',
-  '../img/btn-home.png',
-  '../img/chip-kr.png',
-  '../img/chip-math.png',
-  '../img/chip-en.png',
-  '../img/chip-gk.png'
+  '../img/bg-tile.png'
 ];
-self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(CORE)).then(()=> self.skipWaiting()));
-});
-self.addEventListener('activate', (event) => {
-  event.waitUntil(caches.keys().then(keys => Promise.all(keys.map(k => (k !== CACHE_NAME ? caches.delete(k) : null)))).then(()=> self.clients.claim()));
-});
-const RUNTIME_CDN=['https://cdn.tailwindcss.com','https://fonts.googleapis.com','https://fonts.gstatic.com','https://cdn.jsdelivr.net'];
-self.addEventListener('fetch', (event)=>{
-  if(event.request.method!=='GET') return;
-  const url=new URL(event.request.url);
-  if(url.origin===self.location.origin){
-    event.respondWith(caches.match(event.request).then(c=>c||fetch(event.request)));
-    return;
-  }
-  if(RUNTIME_CDN.some(p=>url.href.startsWith(p))){
-    event.respondWith(caches.open(CACHE_NAME).then(async cache=>{
-      const cached=await cache.match(event.request);
-      const fetcher=fetch(event.request).then(res=>{ if(res&&res.status===200) cache.put(event.request,res.clone()); return res; }).catch(()=>cached);
-      return cached || fetcher;
-    }));
-  }
+self.addEventListener('install', e=> e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
+self.addEventListener('activate', e=> e.waitUntil(caches.keys().then(keys=>Promise.all(keys.map(k=>k===CACHE?null:caches.delete(k)))).then(()=>self.clients.claim())));
+self.addEventListener('fetch', e=>{
+  if(e.request.method!=='GET') return;
+  const url=new URL(e.request.url);
+  if(url.origin===self.location.origin){ e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))); return; }
+  // network-first for online APIs
+  e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)));
 });
