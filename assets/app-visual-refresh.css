@@ -1,0 +1,7 @@
+
+/* Visual refresh v1.2.3 */
+img#startBtn, img#btnReviewWrong, #quiz img#btnNext, #quiz img#btnReveal,
+#result img#btnRetry, #result img#btnHome { height: 44px !important; }
+img[src*="btn-"][src$=".png"] { height: 44px; }
+#stickerGrid img { width: 40px; height: 40px; }
+.tag { font-size: .78rem; padding: .2rem .55rem; }
